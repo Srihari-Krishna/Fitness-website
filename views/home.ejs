@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>FitHub</title>
+</head>
+<body>
+    <section id="header"> 
+    <div class="banner">
+        <div class="navbar">
+            <img src="/images/logo.svg" class="logo" alt="Fithub">
+            <ul class="nav-links">
+                <li><a href="#features">Services</a></li>
+                
+                <li><a href="/contact_us">Feedback</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1>START YOUR FITNESS JOURNEY</h1>
+            <p>Get started on your fitness journey</p>
+            <div>
+                <button type="button" onclick="location.href = 'login.html';"><span class="spanbutton"></span>GET STARTED</button>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="features">
+        <h1>Our Features</h1>
+        
+        <div class="row">
+            <div class="feature-col">
+                <img src="/images/fitness1.jpg" alt="">
+                <h3>Workout of the Day</h3>
+                <p>Get a new workout every day to keep your fitness routine fresh.</p>
+            </div>
+            <div class="feature-col">
+                <img src="/images/fitness2.jpg" alt="">
+                <h3>User dashboard</h3>
+                <p>Track your progress, set goals, and view your workout history.</p>
+            </div>
+            <div class="feature-col">
+                <img src="/images/fitness3.jpg" alt="">
+                <h3>Calorie tracker</h3>
+                <p>Track your calories to plan your diet </p>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="review">
+        <h1 class="carousel-title">What others say about our website</h1>
+        <div  id="carousel">
+            
+        </div>
+    </section>
+        
+    <section id="cta">
+        <h1>Ready to transform your fitness journey?<br>Join us today and start working towards a healthier and stronger you.</h1>
+        <a href="/contact_us" class="button-link">Contact Us</a>
+    </section>
+
+    <section id="footer">
+        <h3>About Us</h4>
+        <p>kdhfkshfhsh</p>
+        <div class="icons">
+            <i class="fa fab fa-facebook"></i>
+            <i class="fa fab fa-twitter"></i>
+            <i class="fa fab fa-instagram"></i>
+            <i class="fa fab fa-linkedin"></i>
+        </div>
+        <p>Made by PES1UG22CS611 and PES1UG22CS580</p>
+    </section>
+        
+    <script type="text/babel">
+        class ImageCarousel extends React.Component {
+            constructor() {
+                super();
+
+                this.state = {
+                    data: [
+                        {
+                            image: '/images/man1.jpg',
+                            text: 'Amazing! Cannot believe this is free.',
+                        },
+                        {
+                            image: '/images/man2.jpg',
+                            text: 'This website made me more excited to workout regularly!',
+                        },
+                        {
+                            image: '/images/man3.jpg',
+                            text: 'Simple and easy to use',
+                        },
+                    ],
+                    currentIndex: 0,
+                };
+            }
+
+            nextImage = () => {
+                this.setState((prevState) => {
+                    const newIndex = (prevState.currentIndex + 1) % this.state.data.length;
+                    return { currentIndex: newIndex };
+                });
+            }
+
+            render() {
+                const { data, currentIndex } = this.state;
+                const currentData = data[currentIndex];
+
+                return (
+                    <section id="review">
+                        <div className="image-carousel" onClick={this.nextImage}>
+                            <img src={currentData.image} alt="Image" id="image" />
+                            <p id="text">{currentData.text}</p>
+                        </div>
+                    </section>
+                );
+            }
+        }
+
+        ReactDOM.render(<ImageCarousel />, document.getElementById('carousel'));
+
+    </script>
+</body>
+</html>

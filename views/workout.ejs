@@ -1,0 +1,122 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/styles.css"> 
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muscle Info App</title>
+</head>
+<body>
+    <section id="sub-header"> 
+        <div class="sub-banner">
+            <div class="navbar">
+                <img src="/images/logo.svg" class="logo" alt="Fithub">
+                <ul class="nav-links">
+                    <li><a href="/">Services</a></li>
+                    <li><a href="/contact_us">Feedback</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </div>
+    
+        </div>
+    
+        <h1>Workouts</h1>
+        </section>
+    
+    <section class="app-container">
+        <div id="root"></div>
+    </section>
+    
+
+    <section id="footerc">
+        <h3>About Us</h4>
+        <p>kdhfkshfhsh</p>
+        <div class="icons">
+            <i class="fa fab fa-facebook"></i>
+            <i class="fa fab fa-twitter"></i>
+            <i class="fa fab fa-instagram"></i>
+            <i class="fa fab fa-linkedin"></i>
+        </div>
+        <p>Made by PES1UG22CS611 and PES1UG22CS580</p>
+    </section>    
+
+  
+  <script type="text/babel">
+    // Define a functional component for MuscleInfo
+    function MuscleInfo({ muscles }) {
+      // State to track the selected muscle
+      const [selectedMuscle, setSelectedMuscle] = React.useState('bicep');
+
+      // Find the selected muscle in the muscles array
+      const selectedMuscleData = muscles.find((muscle) => muscle.name === selectedMuscle);
+
+      // Handle dropdown change
+      const handleDropdownChange = (event) => {
+        setSelectedMuscle(event.target.value);
+      };
+
+      return (
+        <div className="container">
+          <h1 className="h_title">Muscle workouts</h1>
+          <label htmlFor="muscleDropdown">Select a Muscle:</label>
+          <select id="muscleDropdown" onChange={handleDropdownChange} value={selectedMuscle}>
+            {muscles.map((muscle) => (
+              <option key={muscle.name} value={muscle.name}>
+                {muscle.name}
+              </option>
+            ))}
+          </select>
+
+          {selectedMuscleData && (
+            <div>
+             <h2 className="muscleName">{selectedMuscleData.name.toUpperCase()}</h2>
+              
+             <%/* <video width="400" controls>
+                <source src={selectedMuscleData.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video> */%>
+
+                <div>
+                    <iframe
+                        width="560"
+                        height="315"
+                        src={`https://www.youtube.com/embed/${selectedMuscleData.video}`}
+                        title={`Muscle ${selectedMuscleData.name} Video`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                </div>
+
+              <div>
+                {selectedMuscleData.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`${selectedMuscleData.name} image ${index + 1}`}
+                    style={{ maxWidth: '500px', margin: '5px' }}
+                  />
+                ))}
+              </div>
+              <p className="muscleInfo" style={{ whiteSpace: 'pre-line' }}>{selectedMuscleData.text}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+    
+    // Extract the serverData passed from EJS template
+    const serverData = <%- JSON.stringify(muscles) %>;
+    
+
+    // Render the MuscleInfo component to the root element
+    ReactDOM.render(<MuscleInfo muscles={serverData} />, document.getElementById('root'));
+  </script>
+</body>
+</html>

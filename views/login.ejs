@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="loginStyle.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <div class="input-box">
+                    <input type="text" name="username" id="name" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Register</h2>
+            <form action="/signup" method="post">
+                <div class="input-box">
+                    <input type="text" name="username" id="name" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" id="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/babel">
+        const wrapper = document.querySelector('.wrapper');
+        const loginLink = document.querySelector('.login-link');
+        const registerLink = document.querySelector('.register-link')
+
+        registerLink.addEventListener('click',()=>{
+            wrapper.classList.add('active');
+        });
+
+        loginLink.addEventListener('click',()=>{
+            wrapper.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
